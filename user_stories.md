@@ -2,7 +2,7 @@
 
 ## End User Experience
 - As a end-user I want my data to be protected so that I don’t need to worry about it.
-- As an end-user I want a <chat function> so that I can <talk with other people in my ski group>.
+- As an end-user I want a chat function so that I can talk with other people in my ski group.
 - As an end-user, I want to authenticate securely and not have to register.
 
 ## Frontend Developers
