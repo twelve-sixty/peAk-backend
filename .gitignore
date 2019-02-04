@@ -2,8 +2,8 @@ Source: https://github.com/github/gitignore/blob/master/Python.gitignore
 
 # User generated
 ENV/
-*/.vscode
-*/.idea
+.vscode/
+.idea/
 .DS_Store
 
 
