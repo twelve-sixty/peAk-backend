@@ -15,7 +15,7 @@ This project will provide RESTful API to serve as a backend for its associated a
 # Getting Started
 - Clone this repo
 - Create a virtual environment: `pipenv shell`
-- Install dependencies: `pipenv install`
+- Install dependencies: `pipenv install -r requirement.txt`
 - Create a .env file (more details to come)
 - Run the development server: `python3 manage.py runserver 0.0.0.0:8000`
 
