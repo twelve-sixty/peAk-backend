@@ -6,12 +6,11 @@ from .models import Resort
 
 #TODO: Uncomment auth lines when app auth is working
 
-class ResortListApiView(generics.ListCreateAPIView):
+class ResortListApiView(generics.ListAPIView):
     """List or create Resort objects in API."""
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication, )
+    # permission_classes = (IsAuthenticated,)
+    # authentication_classes = (TokenAuthentication, )
     serializer_class = ResortSerializer
-    print('yoohoo')
     #https://stackoverflow.com/questions/3711349/django-and-query-string-parameters
 
     def get_queryset(self):
