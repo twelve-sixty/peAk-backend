@@ -1,13 +1,13 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
-from .models import Resort
+# from django.contrib.auth.models import PeakUser
+from .models import Resort, PeakUser
 
 
 class ResortSerializer(serializers.ModelSerializer):
     """Create serialized Resort objects to serve from the API."""
     class Meta:
         model = Resort
-        fields = ('id', 'resort_name', 'resort_location_lat', 'resort_location_long', 'resort_address_line1',
+        fields = ('id', 'resort_name', 'resort_location_latitude', 'resort_location_longitude', 'resort_address_line1',
                   'resort_address_line2', 'resort_address_city', 'resort_address_state', 'resort_address_zip_code',
                   'resort_website_url', 'resort_altitude')
 
@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
     #TODO: build UserSerializer class
     password = serializers.CharField(write_only=True)
     class Meta:
-        model = User
+        model = PeakUser
         fields = (
             'id',
             'username',
