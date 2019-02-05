@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ResortSerializer, UserSerializer, TeamSerializer, MessageSerializer, User
-from .models import Resort
+from .serializers import ResortSerializer, UserSerializer, TeamSerializer, MessageSerializer
+from .models import Resort, PeakUser
 
 #TODO: Uncomment auth lines when app auth is working
 
@@ -63,7 +63,7 @@ class UserApiView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        return User.objects.filter(id=self.kwargs['pk'])
+        return PeakUser.objects.filter(id=self.kwargs['pk'])
 
 
 class RegisterApiView(generics.CreateAPIView):
