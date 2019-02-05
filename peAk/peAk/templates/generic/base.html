@@ -19,8 +19,8 @@
       <ul>
         <li><a href="{% url "home" %}">Home</a></li>
         {% if user.is_authenticated %}
-        <li><a href="{% url "budget_list_view" %}">Budget</a></li>
-        <li><a href="{% url "budget_detail_view" %}">Budget Detail</a></li>
+        <li><a href="{% url "resort_list" %}">Resorts</a></li>
+        <li><a href="{% url "chat" %}">Chat Room</a></li>
         {% if user.is_superuser %}
         <li><a href="{% url "admin:index" %}">Admin</a></li>
         {% endif %}

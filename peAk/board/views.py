@@ -4,8 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import ResortSerializer, UserSerializer, TeamSerializer, MessageSerializer, User
 from .models import Resort
 
-#TODO: Uncomment auth lines when app auth is working
 
+# TODO: Uncomment auth lines when app auth is working
 class ResortListApiView(generics.ListCreateAPIView):
     """List or create Resort objects in API."""
     permission_classes = (IsAuthenticated,)

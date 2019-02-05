@@ -144,6 +144,13 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
+# Django Registration Settings
+ACCOUNT_ACTIVATION_DAYS = 1
+LOGIN_REDIRECT_URL = '/'
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 REDIS_URL = 'redis://{}:6379'.format(os.getenv('REDIS_URL'))
 # CACHES = {
 #     'default': {
@@ -171,7 +178,7 @@ CHANNEL_LAYERS = {
         # This example app uses the Redis channel layer implementation channels_redis
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [(REDIS_URL, 'localhost', 6379)],
+            "hosts": [REDIS_URL, ('localhost', 6379)],
             # "hosts": [(redis_host, 6379)],
         },
     },
