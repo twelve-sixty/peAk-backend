@@ -1,3 +1,4 @@
+from django.urls import include
 """peAk URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -20,4 +21,5 @@ from django.urls import path, include
 urlpatterns = [
     path('chat/', include('chat.urls')),
     path('admin/', admin.site.urls),
+    path('api/v1', '', include('board.urls'))
 ]
