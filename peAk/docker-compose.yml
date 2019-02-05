@@ -2,7 +2,6 @@ version: '3'
 
 services:
   redis:
-    # restart: always
     image: redis:latest
     ports:
      - "6379:6379"
@@ -10,14 +9,12 @@ services:
      - redis_data:/data
 
   db:
-    # restart: always
     container_name: 'db'
     image: postgres:10.6-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
   web:
-    # restart: always
     container_name: 'web'
     env_file: .env
     build: .
@@ -33,3 +30,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
+

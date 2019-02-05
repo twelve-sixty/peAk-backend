@@ -11,4 +11,4 @@ RUN apt-get update && \
 
 COPY . /src
 
-RUN pip install -r requirements.txt
+RUN pip install -r requirement.txt
