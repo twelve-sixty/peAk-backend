@@ -42,7 +42,7 @@ class Resort(models.Model):
     resort_address_zip_code = models.IntegerField()
     resort_website_url = models.CharField(max_length=128, blank=True)
     resort_altitude = models.IntegerField(blank=True)
-    resort_teams = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True)
+    resort_teams = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
 
 
 class State(models.Model):
