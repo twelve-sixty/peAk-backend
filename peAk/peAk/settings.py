@@ -32,7 +32,9 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split()
 
 INSTALLED_APPS = [
     'peAk',
+    'chat',
     'board',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -157,3 +159,15 @@ CACHES = {
 
 # cache timeout
 CACHE_TTL = 60 * 1
+
+
+# channel config
+ASGI_APPLICATION = 'peAk.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
