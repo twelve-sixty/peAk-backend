@@ -5,28 +5,27 @@ class User(models.Model):
     Holding the users for peAk website.
     """
     user_email = models.CharField(max_length=128)
-    # userName = models.CharField(max_length=64)
-    firstName = models.CharField(max_length=64)
-    lastName = models.CharField(max_length=64)
-    # favResort = models.CharField(max_length=128)
-    # dateOfBirth = models.DateField()
-    groupsBelong = models.ForeignKey('Team', on_delete=models.CASCADE)
-    # profilePicture = models.FileField(upload_to='uploads/')
-    # dateJoined = models.DateField()
+    user_name_first = models.CharField(max_length=64)
+    user_name_last = models.CharField(max_length=64)
+    user_fav_resort = models.CharField(max_length=128)
+    user_date_of_birth = models.DateField()
+    user_groups_belong = models.ForeignKey('Team', on_delete=models.CASCADE)
+    user_profile_picture = models.FileField(upload_to='uploads/')
+    user_date_joined = models.DateField()
 
 
 class Team(models.Model):
     """
     Database table for teams / groups as created by user.
     """
-    name = models.CharField(max_length=128)
-    # meetDate = models.DateField()
-    # maxCapacity = models.IntegerField()
-    # description = models.CharField(max_length=128)
-    # status = models.CharField(max_length=16, default='Active')
-    # administrator = models.ForeignKey('User', on_delete=models.CASCADE)
-    # resort = models.ForeignKey('Resort', on_delete=models.CASCADE)
-    # users = models.ForeignKey('User', on_delete=models.CASCADE)
+    team_name = models.CharField(max_length=128)
+    team_meet_date = models.DateField()
+    team_max_capacity = models.IntegerField()
+    team_description = models.CharField(max_length=128)
+    team_status = models.CharField(max_length=16, default='Active')
+    team_administrator = models.ForeignKey('User', on_delete=models.CASCADE)
+    team_resort = models.ForeignKey('Resort', on_delete=models.CASCADE)
+
 
 class Resort(models.Model):
     """
