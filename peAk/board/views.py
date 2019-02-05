@@ -6,7 +6,7 @@ from .models import Resort
 
 #TODO: Uncomment auth lines when app auth is working
 
-class ResortListApiView(generics.ListAPIView):
+class ResortListApiView(generics.ListCreateAPIView):
     """List or create Resort objects in API."""
     # permission_classes = (IsAuthenticated,)
     # authentication_classes = (TokenAuthentication, )
