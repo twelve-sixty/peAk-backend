@@ -27,6 +27,7 @@ Markdown = "==3.0.1"
 psycopg2-binary = "*"
 channels = "*"
 channels-redis = "*"
+awsebcli = "*"
 
 [requires]
 python_version = "3.6"
