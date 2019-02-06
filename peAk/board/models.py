@@ -10,8 +10,8 @@ class PeakUser(models.Model):
     user_lastName = models.CharField(max_length=64)
     user_fav_resort = models.CharField(max_length=128, blank=True)
     user_date_of_birth = models.DateField()
-    user_groups_belong = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True)
-    user_profile_picture = models.FileField(upload_to='uploads/')
+    user_groups_belong = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
+    user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
     user_date_joined = models.DateField()
 
 
