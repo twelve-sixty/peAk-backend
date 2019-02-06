@@ -13,7 +13,7 @@ db_protocol = 'postgresql+psycopg2'
 if "RDS_DB_NAME" in os.environ:
     db_host = os.environ.get('RDS_HOSTNAME', '')
     db_name = os.environ.get('RDS_DB_NAME', '')
-    db_password = os.environ.get('RDS_PASS', '')
+    db_pass = os.environ.get('RDS_PASS', '')
     db_user = os.environ.get('RDS_USERNAME', '')
 else:
     db_host = os.environ.get('DB_HOST', '')
