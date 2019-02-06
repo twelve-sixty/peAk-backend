@@ -1,17 +1,16 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ResortSerializer, UserSerializer, TeamSerializer, MessageSerializer, User
-from .models import Resort
+from .serializers import ResortSerializer, UserSerializer, TeamSerializer, MessageSerializer
+from .models import Resort, PeakUser, Team
 
+#TODO: Uncomment auth lines when app auth is working
 
-# TODO: Uncomment auth lines when app auth is working
 class ResortListApiView(generics.ListCreateAPIView):
     """List or create Resort objects in API."""
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication, )
+    # permission_classes = (IsAuthenticated,)
+    # authentication_classes = (TokenAuthentication, )
     serializer_class = ResortSerializer
-    print('yoohoo')
     #https://stackoverflow.com/questions/3711349/django-and-query-string-parameters
 
     def get_queryset(self):
@@ -43,10 +42,12 @@ class UserDetailApiView(generics.RetrieveAPIView):
 class TeamListView(generics.ListCreateAPIView):
     pass
 
-#TODO: Build out view
+
 class TeamDetailView(generics.RetrieveAPIView):
     #TODO: add isAdministrator property to JSON response if requester owns the Team
-    pass
+    serializer_class = TeamSerializer
+    def get_queryset(self):
+        return Team.objects.filter(id=self.kwargs['pk'])
 
 #TODO: Build out view
 class MessageListView(generics.ListAPIView):
@@ -64,7 +65,7 @@ class UserApiView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        return User.objects.filter(id=self.kwargs['pk'])
+        return PeakUser.objects.filter(id=self.kwargs['pk'])
 
 
 class RegisterApiView(generics.CreateAPIView):
