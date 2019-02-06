@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .serializers import ResortSerializer, UserSerializer, TeamSerializer, MessageSerializer
-from .models import Resort, PeakUser
+from .models import Resort, PeakUser, Team
 
 #TODO: Uncomment auth lines when app auth is working
 
@@ -42,10 +42,12 @@ class UserDetailApiView(generics.RetrieveAPIView):
 class TeamListView(generics.ListCreateAPIView):
     pass
 
-#TODO: Build out view
+
 class TeamDetailView(generics.RetrieveAPIView):
     #TODO: add isAdministrator property to JSON response if requester owns the Team
-    pass
+    serializer_class = TeamSerializer
+    def get_queryset(self):
+        return Team.objects.filter(id=self.kwargs['pk'])
 
 #TODO: Build out view
 class MessageListView(generics.ListAPIView):
