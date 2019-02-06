@@ -49,16 +49,17 @@ class UserSerializer(serializers.ModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     name = serializers.ReadOnlyField(source='team_name')
     description = serializers.ReadOnlyField(source='team_description')
-    # name = serializers.ReadOnlyField(source='team_name')
     #TODO: Add a currentCapacity that updates whenever a user is added to a team
+    currentCapacity = serializers.ReadOnlyField(source='team_max_capacity')
     maxCapacity = serializers.ReadOnlyField(source='team_max_capacity')
     meetDate = serializers.ReadOnlyField(source='team_meet_date')
-    resort = serializers.ReadOnlyField(source='team_resort')
+    #TODO: resort is not serializable. How do we represent that?
+    # resort = serializers.ReadOnlyField(source='team_resort')
     status = serializers.ReadOnlyField(source='team_status')
 
     class Meta:
         model = Team
-        fields = ('id', 'name', 'description', 'currentCapacity', 'maxCapacity', 'meetDate', 'resort', 'status')
+        fields = ('id', 'name', 'description', 'currentCapacity', 'maxCapacity', 'meetDate', 'status')
 
 
 class MessageSerializer(serializers.ModelSerializer):
