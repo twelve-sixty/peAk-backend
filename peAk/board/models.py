@@ -5,14 +5,16 @@ class PeakUser(models.Model):
     """
     Holding the users for peAk website.
     """
+    user_username = models.CharField(max_length=64)
     user_email = models.CharField(max_length=64)
     user_firstName = models.CharField(max_length=64)
     user_lastName = models.CharField(max_length=64)
-    user_fav_resort = models.CharField(max_length=128, blank=True)
+    user_fav_resort = models.CharField(max_length=128, blank=True, null=True)
     user_date_of_birth = models.DateField()
     user_groups_belong = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
-    user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
+    user_profile_picture = models.FileField(upload_to='uploads/', blank=True, null=True)
     user_date_joined = models.DateField()
+    user_bio = models.CharField(max_length=1024)
 
 
 class Team(models.Model):
@@ -25,7 +27,7 @@ class Team(models.Model):
     team_description = models.CharField(max_length=128)
     team_status = models.CharField(max_length=16, default='Active')
     team_administrator = models.ForeignKey('PeakUser', on_delete=models.CASCADE)
-    team_resort = models.ForeignKey('Resort', on_delete=models.CASCADE)
+    team_resort = models.ForeignKey('Resort', on_delete=models.CASCADE, related_name='teams')
 
 
 class Resort(models.Model):
@@ -42,7 +44,7 @@ class Resort(models.Model):
     resort_address_zip_code = models.IntegerField()
     resort_website_url = models.CharField(max_length=128, blank=True)
     resort_altitude = models.IntegerField(blank=True)
-    resort_teams = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
+    # resort_teams = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
 
 
 class State(models.Model):
