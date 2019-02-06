@@ -33,8 +33,8 @@ class Resort(models.Model):
     Database table for Resort. Data pulled from API.
     """
     resort_name = models.CharField(max_length=64)
-    resort_location_longitude = models.DecimalField(max_digits=30, decimal_places=15)
-    resort_location_latitude = models.DecimalField(max_digits=30, decimal_places=15)
+    resort_location_longitude = models.CharField(max_length=64)
+    resort_location_latitude = models.CharField(max_length=64)
     resort_address_line1 = models.CharField(max_length=64)
     resort_address_line2 = models.CharField(max_length=64, blank=True)
     resort_address_city = models.CharField(max_length=64)
