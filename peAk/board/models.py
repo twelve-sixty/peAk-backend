@@ -36,7 +36,7 @@ class Resort(models.Model):
     resort_location_longitude = models.CharField(max_length=64)
     resort_location_latitude = models.CharField(max_length=64)
     resort_address_line1 = models.CharField(max_length=64)
-    resort_address_line2 = models.CharField(max_length=64, blank=True)
+    resort_address_line2 = models.CharField(max_length=64, blank=True, null=True, default='')
     resort_address_city = models.CharField(max_length=64)
     resort_address_state = models.ForeignKey('State', on_delete=models.CASCADE)
     resort_address_zip_code = models.IntegerField()

@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 
-csv_data = pd.read_csv('skiResort.csv')
+csv_data = pd.read_csv('assets/skiresorts.csv')
 
 
 df = pd.DataFrame(csv_data)
@@ -25,4 +25,5 @@ engine = create_engine('{}://{}:{}@{}:5432/{}'.format(
     db_protocol, db_user, db_pass, db_host, db_name
 ))
 
-df.to_sql("", engine, if_exists='append', index=False)
+df.to_sql("board_resort", engine, if_exists='append', index=False)
+print(df)
