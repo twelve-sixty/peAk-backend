@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+
+body {
+    font-family: "Playfair Display"
+}
+
+header {
+    background-color: #222222;
+    color: whitesmoke;
+    padding: 10px 15px;
+}
+
+main {
+    padding: 20px;
+}
+
+ul {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+h6 a {
+    color: rgb(74, 233, 74);
+}
+
+h4 a {
+    font-size: 16px;
+}
+
+li a {
+    text-decoration: none;
+    color:rgb(74, 233, 74);
+
+}
+
+a {
+    color: blue;
+
+}
+
+a:hover {
+    color: red;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav li:after {
+    content: ' |';
+}
+
+h6 {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.cover {
+    padding-top: 20px;
+    height: 300px;
+}
+
+.book_detail {
+    padding-top: 20px;
+}
