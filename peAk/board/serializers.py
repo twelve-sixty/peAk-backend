@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Resort, PeakUser, Team
 
 
-class TeamSerializer(serializers.ModelSerializer):
+class TeamOverviewSerializer(serializers.ModelSerializer):
     name = serializers.ReadOnlyField(source='team_name')
     description = serializers.ReadOnlyField(source='team_description')
     # TODO: Add a currentCapacity that updates whenever a user is added to a
@@ -24,6 +24,7 @@ class TeamSerializer(serializers.ModelSerializer):
             'meetDate',
             'status')
 
+
 class ResortSerializer(serializers.ModelSerializer):
     """Create serialized Resort objects to serve from the API."""
     name = serializers.ReadOnlyField(source='resort_name')
@@ -32,7 +33,7 @@ class ResortSerializer(serializers.ModelSerializer):
     websiteUrl = serializers.ReadOnlyField(source='resort_website_url')
     altitude = serializers.ReadOnlyField(source='resort_altitude')
     # Nested serializer for including teams in resort JSON
-    teams = TeamSerializer(many=True)
+    teams = TeamOverviewSerializer(many=True)
     # TODO: Map address fields into address: {..} per spec provided by JAVA team
 
     class Meta:
@@ -71,9 +72,6 @@ class UserSerializer(serializers.ModelSerializer):
             'age',
             'favResort'
         )
-
-
-
 
 
 class MessageSerializer(serializers.ModelSerializer):
