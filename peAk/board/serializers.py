@@ -3,7 +3,28 @@ from rest_framework import serializers
 from .models import Resort, PeakUser, Team
 
 
+class UserSerializer(serializers.ModelSerializer):
+    # TODO: build UserSerializer class
+    username = serializers.ReadOnlyField(source='user_username')
+    bio = serializers.ReadOnlyField(source='user_bio')
+    # TODO: turn age into an actual calculation from birthdate
+    age = serializers.ReadOnlyField(source='user_date_of_birth')
+    favResort = serializers.ReadOnlyField(source='user_fav_resort')
+
+    class Meta:
+        model = PeakUser
+        fields = (
+            'id',
+            'username',
+            'bio',
+            'age',
+            'favResort'
+        )
+
+
 class TeamOverviewSerializer(serializers.ModelSerializer):
+    """Serializes Team objects for inclusion in serialized Resort data. It does not
+    include serialized User data."""
     name = serializers.ReadOnlyField(source='team_name')
     description = serializers.ReadOnlyField(source='team_description')
     # TODO: Add a currentCapacity that updates whenever a user is added to a
@@ -24,6 +45,29 @@ class TeamOverviewSerializer(serializers.ModelSerializer):
             'meetDate',
             'status')
 
+class TeamDetailSerializer(serializers.ModelSerializer):
+    """Serializes Team objects for detailed view. This includes serialized User objects
+    representing members of the Team."""
+    name = serializers.ReadOnlyField(source='team_name')
+    description = serializers.ReadOnlyField(source='team_description')
+    # TODO: Add a currentCapacity that updates whenever a user is added to a
+    # team
+    currentCapacity = serializers.ReadOnlyField(source='team_max_capacity')
+    maxCapacity = serializers.ReadOnlyField(source='team_max_capacity')
+    meetDate = serializers.ReadOnlyField(source='team_meet_date')
+    status = serializers.ReadOnlyField(source='team_status')
+    users = UserSerializer(many=True)
+    class Meta:
+        model = Team
+        fields = (
+            'id',
+            'name',
+            'description',
+            'currentCapacity',
+            'maxCapacity',
+            'meetDate',
+            'status',
+            'users')
 
 class ResortSerializer(serializers.ModelSerializer):
     """Create serialized Resort objects to serve from the API."""
@@ -52,25 +96,6 @@ class ResortSerializer(serializers.ModelSerializer):
             'websiteUrl',
             'altitude',
             'teams'
-        )
-
-
-class UserSerializer(serializers.ModelSerializer):
-    # TODO: build UserSerializer class
-    username = serializers.ReadOnlyField(source='user_username')
-    bio = serializers.ReadOnlyField(source='user_bio')
-    # TODO: turn age into an actual calculation from birthdate
-    age = serializers.ReadOnlyField(source='user_date_of_birth')
-    favResort = serializers.ReadOnlyField(source='user_fav_resort')
-
-    class Meta:
-        model = PeakUser
-        fields = (
-            'id',
-            'username',
-            'bio',
-            'age',
-            'favResort'
         )
 
 

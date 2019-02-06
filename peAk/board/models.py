@@ -28,7 +28,7 @@ class Team(models.Model):
     team_status = models.CharField(max_length=16, default='Active')
     team_administrator = models.ForeignKey('PeakUser', on_delete=models.CASCADE)
     team_resort = models.ForeignKey('Resort', on_delete=models.CASCADE, related_name='teams')
-
+    team_users = models.ForeignKey('PeakUser', on_delete=models.CASCADE, related_name='users')
 
 class Resort(models.Model):
     """
@@ -44,7 +44,7 @@ class Resort(models.Model):
     resort_address_zip_code = models.IntegerField()
     resort_website_url = models.CharField(max_length=128, blank=True)
     resort_altitude = models.IntegerField(blank=True)
-    # resort_teams = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
+    resort_teams = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
 
 
 class State(models.Model):

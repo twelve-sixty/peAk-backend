@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ResortSerializer, UserSerializer, TeamSerializer, MessageSerializer
+from .serializers import ResortSerializer, UserSerializer, TeamOverviewSerializer, MessageSerializer, TeamDetailSerializer
 from .models import Resort, PeakUser, Team
 
 #TODO: Uncomment auth lines when app auth is working
@@ -62,7 +62,7 @@ class TeamListView(generics.ListCreateAPIView):
 
 class TeamDetailView(generics.RetrieveAPIView):
     #TODO: add isAdministrator property to JSON response if requester owns the Team
-    serializer_class = TeamSerializer
+    serializer_class = TeamDetailSerializer
     def get_queryset(self):
         return Team.objects.filter(id=self.kwargs['pk'])
 
@@ -96,6 +96,6 @@ class RegisterApiView(generics.CreateAPIView):
 
 class ResortTeamListApiView(generics.ListAPIView):
     """CBV to list Teams associated with a resort."""
-    serializer_class = TeamSerializer
+    serializer_class = TeamOverviewSerializer
     def get_queryset(self):
         return Team.objects.filter(team_resort__id=self.kwargs['resort_id'])
