@@ -1,55 +1,8 @@
 from django.db import models
+from multiselectfield import MultiSelectField
 
 
-class PeakUser(models.Model):
-    """
-    Holding the users for peAk website.
-    """
-    user_email = models.CharField(max_length=64)
-    user_firstName = models.CharField(max_length=64)
-    user_lastName = models.CharField(max_length=64)
-    user_fav_resort = models.CharField(max_length=128, blank=True)
-    user_date_of_birth = models.DateField()
-    user_groups_belong = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
-    user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
-    user_date_joined = models.DateField()
-
-
-class Team(models.Model):
-    """
-    Database table for teams / groups as created by user.
-    """
-    team_name = models.CharField(max_length=128)
-    team_meet_date = models.DateField()
-    team_max_capacity = models.IntegerField()
-    team_description = models.CharField(max_length=128)
-    team_status = models.CharField(max_length=16, default='Active')
-    team_administrator = models.ForeignKey('PeakUser', on_delete=models.CASCADE)
-    team_resort = models.ForeignKey('Resort', on_delete=models.CASCADE)
-
-
-class Resort(models.Model):
-    """
-    Database table for Resort. Data pulled from API.
-    """
-    resort_name = models.CharField(max_length=64)
-    resort_location_longitude = models.CharField(max_length=64)
-    resort_location_latitude = models.CharField(max_length=64)
-    resort_address_line1 = models.CharField(max_length=64)
-    resort_address_line2 = models.CharField(max_length=64, blank=True, null=True, default='')
-    resort_address_city = models.CharField(max_length=64)
-    resort_address_state = models.ForeignKey('State', on_delete=models.CASCADE)
-    resort_address_zip_code = models.IntegerField()
-    resort_website_url = models.CharField(max_length=128, blank=True)
-    resort_altitude = models.IntegerField(blank=True)
-    resort_teams = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
-
-
-class State(models.Model):
-    """
-    Database Table for all states.
-    """
-    STATES = [
+STATES = [
         ('AK', 'AK'),
         ('AS', 'AS'),
         ('AZ', 'AZ'),
@@ -105,25 +58,75 @@ class State(models.Model):
         ('WV', 'WV'),
         ('WY', 'WY')
     ]
-    state = models.CharField(max_length=2, choices=STATES)
+
+TAGS = [
+    ('2BD', '2 black diamond'),
+    ('1BD', '1 black diamond'),
+    ('BS', 'blue square'),
+    ('GS', 'green circle'),
+    ('OP', 'off piste'),
+    ('PH', 'party hardy'),
+    ('FF', 'family friendly'),
+    ('TP', 'terrain park')
+]
+
+
+class Resort(models.Model):
+    """
+    Database table for Resort. Data pulled from API.
+    """
+    resort_name = models.CharField(max_length=64)
+    resort_location_latitude = models.CharField(max_length=64)
+    resort_location_longitude = models.CharField(max_length=64)
+    resort_address_line1 = models.CharField(max_length=64)
+    resort_address_line2 = models.CharField(max_length=64, blank=True, null=True, default='')
+    resort_address_city = models.CharField(max_length=64)
+    resort_address_state = models.CharField(max_length=2, choices=STATES)
+    resort_address_zip_code = models.IntegerField()
+    resort_website_url = models.CharField(max_length=128, blank=True)
+    resort_altitude = models.IntegerField(blank=True)
+
+
+class Team(models.Model):
+    """
+    Database table for teams / groups as created by user.
+    """
+    team_name = models.CharField(max_length=128)
+    team_meet_date = models.DateField()
+    team_max_capacity = models.IntegerField()
+    team_description = models.CharField(max_length=128)
+    team_status = models.CharField(max_length=16, default='Active')
+    team_tags = MultiSelectField(choices=TAGS, blank=True, null=True)
+    team_resort = models.ForeignKey('Resort', on_delete=models.CASCADE)
+    team_administrator = models.ForeignKey('PeakUser', on_delete=models.CASCADE)
 
 
 class MessageBoard(models.Model):
     """
     Database Table for each Team Message Board.
     """
-    message_board_teams = models.ForeignKey('Team', on_delete=models.CASCADE)
-    message_board_messages = models.ForeignKey('Message', on_delete=models.CASCADE)
     message_board_name = models.CharField(max_length=16)
     message_board_description = models.CharField(max_length=128)
+    message_board_teams = models.ForeignKey('Team', on_delete=models.CASCADE)
 
 
 class Message(models.Model):
     """Database Table for each Message."""
     message = models.CharField(max_length=128)
     message_date = models.DateField()
+    message_board = models.ForeignKey('MessageBoard', on_delete=models.CASCADE)
     message_user = models.ForeignKey('PeakUser', on_delete=models.CASCADE)
 
 
-# # class Chat(models.Model):
-# #     pass
+class PeakUser(models.Model):
+    """
+    Holding the users for peAk website.
+    """
+    user_email = models.CharField(max_length=64)
+    user_firstName = models.CharField(max_length=64)
+    user_lastName = models.CharField(max_length=64)
+    user_fav_resort = models.CharField(max_length=128, blank=True)
+    user_date_of_birth = models.DateField()
+    user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
+    user_date_joined = models.DateField()
+    user_team_belong = models.ManyToManyField('Team', blank=True)
