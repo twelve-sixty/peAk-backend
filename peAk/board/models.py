@@ -129,4 +129,4 @@ class PeakUser(models.Model):
     user_date_of_birth = models.DateField()
     user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
     user_date_joined = models.DateField()
-    user_team_belong = models.ManyToManyField('Team', blank=True, null=True)
+    user_team_belong = models.ManyToManyField('Team', blank=True)
