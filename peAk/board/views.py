@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ResortSerializer, UserSerializer, TeamSerializer, MessageSerializer
+from .serializers import ResortSerializer, UserSerializer, TeamOverviewSerializer, MessageSerializer, TeamDetailSerializer
 from .models import Resort, PeakUser, Team
 
 #TODO: Uncomment auth lines when app auth is working
@@ -35,17 +35,34 @@ class ResortDetailApiView(generics.RetrieveAPIView):
 #TODO: Build out view
 
 class UserDetailApiView(generics.RetrieveAPIView):
-    pass
+
+    # password = serializers.CharField(write_only=True)
+    serializer_class = UserSerializer
+
+
+    def get_queryset(self):
+        return PeakUser.objects.filter(id=self.kwargs['pk'])
+
+    def create(self, validated_data):
+        user = super().create({
+            'username': validated_data['username'],
+            'email': validated_data['email']
+        })
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
 
 #TODO: Build out view
 
 class TeamListView(generics.ListCreateAPIView):
-    pass
+    def get_queryset(self):
+        return Team.objects.filter(team_resort=self.kwargs['pk'])
 
 
 class TeamDetailView(generics.RetrieveAPIView):
     #TODO: add isAdministrator property to JSON response if requester owns the Team
-    serializer_class = TeamSerializer
+    serializer_class = TeamDetailSerializer
     def get_queryset(self):
         return Team.objects.filter(id=self.kwargs['pk'])
 
@@ -75,3 +92,10 @@ class RegisterApiView(generics.CreateAPIView):
     permission_classes = ''
     authentication_classes = (TokenAuthentication,)
     serializer_class = UserSerializer
+
+
+class ResortTeamListApiView(generics.ListAPIView):
+    """CBV to list Teams associated with a resort."""
+    serializer_class = TeamOverviewSerializer
+    def get_queryset(self):
+        return Team.objects.filter(team_resort__id=self.kwargs['resort_id'])
