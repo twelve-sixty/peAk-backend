@@ -27,6 +27,7 @@ Markdown = "==3.0.1"
 psycopg2-binary = "*"
 channels = "*"
 channels-redis = "*"
+django-multiselectfield = "*"
 
 [requires]
 python_version = "3.6"
