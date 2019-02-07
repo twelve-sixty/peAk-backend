@@ -5,8 +5,9 @@ from .models import Resort, PeakUser, Team
 
 class UserSerializer(serializers.ModelSerializer):
     """
-
     """
+
+    # Map field names from our db fields to the ones expected by the frontend
     username = serializers.ReadOnlyField(source='user_username')
     bio = serializers.ReadOnlyField(source='user_bio')
     # TODO: turn age into an actual calculation from birthdate
@@ -27,10 +28,11 @@ class UserSerializer(serializers.ModelSerializer):
 class TeamOverviewSerializer(serializers.ModelSerializer):
     """Serializes Team objects for inclusion in serialized Resort data. It does not
     include serialized User data."""
+
+    # Map field names from our db fields to the ones expected by the frontend
     name = serializers.ReadOnlyField(source='team_name')
     description = serializers.ReadOnlyField(source='team_description')
-    # TODO: Add a currentCapacity that updates whenever a user is added to a
-    # team
+    # TODO: Add a currentCapacity that updates whenever a user is added to a team
     currentCapacity = serializers.ReadOnlyField(source='team_max_capacity')
     maxCapacity = serializers.ReadOnlyField(source='team_max_capacity')
     meetDate = serializers.ReadOnlyField(source='team_meet_date')
@@ -50,10 +52,11 @@ class TeamOverviewSerializer(serializers.ModelSerializer):
 class TeamDetailSerializer(serializers.ModelSerializer):
     """Serializes Team objects for detailed view. This includes serialized User objects
     representing members of the Team."""
+
+    # Map field names from our db fields to the ones expected by the frontend
     name = serializers.ReadOnlyField(source='team_name')
     description = serializers.ReadOnlyField(source='team_description')
-    # TODO: Add a currentCapacity that updates whenever a user is added to a
-    # team
+    # TODO: Add a currentCapacity that updates whenever a user is added to a team
     currentCapacity = serializers.ReadOnlyField(source='team_max_capacity')
     maxCapacity = serializers.ReadOnlyField(source='team_max_capacity')
     meetDate = serializers.ReadOnlyField(source='team_meet_date')
@@ -75,6 +78,8 @@ class TeamDetailSerializer(serializers.ModelSerializer):
 class ResortListSerializer(serializers.ModelSerializer):
     """Create serialized Resort objects to serve from the API. This returns the minimal detail
     expected for listing resort search results."""
+
+    # Map field names from our db fields to the ones expected by the frontend
     name = serializers.ReadOnlyField(source='resort_name')
     latitude = serializers.ReadOnlyField(source='resort_location_latitude')
     longitude = serializers.ReadOnlyField(source='resort_location_longitude')
@@ -104,6 +109,8 @@ class ResortDetailSerializer(serializers.ModelSerializer):
     """Create serialized Resort objects to serve from the API. This returns the full data for
     a resort, including the associated Team objects. This is the view for showing detailed info on
     a selected Resort."""
+
+    # Map field names from our db fields to the ones expected by the frontend
     name = serializers.ReadOnlyField(source='resort_name')
     latitude = serializers.ReadOnlyField(source='resort_location_latitude')
     longitude = serializers.ReadOnlyField(source='resort_location_longitude')
