@@ -4,7 +4,9 @@ from .models import Resort, PeakUser, Team
 
 
 class UserSerializer(serializers.ModelSerializer):
-    # TODO: build UserSerializer class
+    """
+
+    """
     username = serializers.ReadOnlyField(source='user_username')
     bio = serializers.ReadOnlyField(source='user_bio')
     # TODO: turn age into an actual calculation from birthdate
@@ -57,6 +59,7 @@ class TeamDetailSerializer(serializers.ModelSerializer):
     meetDate = serializers.ReadOnlyField(source='team_meet_date')
     status = serializers.ReadOnlyField(source='team_status')
     users = UserSerializer(many=True)
+
     class Meta:
         model = Team
         fields = (
