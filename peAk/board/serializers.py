@@ -12,7 +12,8 @@ class UserSerializer(serializers.ModelSerializer):
     bio = serializers.ReadOnlyField(source='user_bio')
     # TODO: turn age into an actual calculation from birthdate
     age = serializers.ReadOnlyField(source='user_date_of_birth')
-    favResort = serializers.ReadOnlyField(source='user_fav_resort')
+    favResort = serializers.ReadOnlyField(source='user_fav_resort', required=False, allow_null=True)
+    teamBelong = serializers.ReadOnlyField(source='user_team_belong', required=False, allow_null=True)
 
     class Meta:
         model = PeakUser
@@ -21,8 +22,8 @@ class UserSerializer(serializers.ModelSerializer):
             'username',
             'bio',
             'age',
-            'favResort'
-        )
+            'favResort',
+            'teamBelong')
 
 
 class TeamOverviewSerializer(serializers.ModelSerializer):

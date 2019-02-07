@@ -31,4 +31,7 @@ urlpatterns = [
     path(
         'message/<int:pk>',
         MessageDetailView().as_view(),
-        name='message_detail')]
+        name='message_detail'),
+    path(
+        'register/', RegisterApiView().as_view(), name='register'
+    )]
