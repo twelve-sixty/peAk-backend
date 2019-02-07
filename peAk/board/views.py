@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ResortSerializer, UserSerializer, TeamOverviewSerializer, MessageSerializer, TeamDetailSerializer
+from .serializers import ResortListSerializer, ResortDetailSerializer, UserSerializer, TeamOverviewSerializer, MessageSerializer, TeamDetailSerializer
 from .models import Resort, PeakUser, Team
 
 #TODO: Uncomment auth lines when app auth is working
@@ -10,7 +10,7 @@ class ResortListApiView(generics.ListCreateAPIView):
     """List or create Resort objects in API."""
     # permission_classes = (IsAuthenticated,)
     # authentication_classes = (TokenAuthentication, )
-    serializer_class = ResortSerializer
+    serializer_class = ResortListSerializer
     #https://stackoverflow.com/questions/3711349/django-and-query-string-parameters
 
     def get_queryset(self):
@@ -27,7 +27,7 @@ class ResortListApiView(generics.ListCreateAPIView):
 
 
 class ResortDetailApiView(generics.RetrieveAPIView):
-    serializer_class = ResortSerializer
+    serializer_class = ResortDetailSerializer
 
     def get_queryset(self):
         return Resort.objects.filter(id=self.kwargs['pk'])

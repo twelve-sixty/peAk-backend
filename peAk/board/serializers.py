@@ -72,8 +72,38 @@ class TeamDetailSerializer(serializers.ModelSerializer):
             'status',
             'users')
 
-class ResortSerializer(serializers.ModelSerializer):
-    """Create serialized Resort objects to serve from the API."""
+class ResortListSerializer(serializers.ModelSerializer):
+    """Create serialized Resort objects to serve from the API. This returns the minimal detail
+    expected for listing resort search results."""
+    name = serializers.ReadOnlyField(source='resort_name')
+    latitude = serializers.ReadOnlyField(source='resort_location_latitude')
+    longitude = serializers.ReadOnlyField(source='resort_location_longitude')
+    websiteUrl = serializers.ReadOnlyField(source='resort_website_url')
+    altitude = serializers.ReadOnlyField(source='resort_altitude')
+    # TODO: Map address fields into address: {..} per spec provided by JAVA team
+
+    class Meta:
+        model = Resort
+
+        fields = (
+            'id',
+            'name',
+            'latitude',
+            'longitude',
+            'resort_address_line1',
+            'resort_address_line2',
+            'resort_address_city',
+            'resort_address_state',
+            'resort_address_zip_code',
+            'websiteUrl',
+            'altitude',
+        )
+
+
+class ResortDetailSerializer(serializers.ModelSerializer):
+    """Create serialized Resort objects to serve from the API. This returns the full data for
+    a resort, including the associated Team objects. This is the view for showing detailed info on
+    a selected Resort."""
     name = serializers.ReadOnlyField(source='resort_name')
     latitude = serializers.ReadOnlyField(source='resort_location_latitude')
     longitude = serializers.ReadOnlyField(source='resort_location_longitude')
@@ -99,7 +129,6 @@ class ResortSerializer(serializers.ModelSerializer):
             'websiteUrl',
             'altitude',
             'teams',
-            # 'resort_team'
         )
 
 
