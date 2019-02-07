@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import ResortListApiView, ResortDetailApiView, UserDetailApiView, TeamListView, TeamDetailView, MessageListView, MessageDetailView, ResortTeamListApiView
+from .views import ResortListApiView, ResortDetailApiView, UserDetailApiView, TeamListView, TeamDetailView, MessageListView, MessageDetailView, ResortTeamListApiView, RegisterApiView
 
 
 urlpatterns = [
@@ -31,4 +31,7 @@ urlpatterns = [
     path(
         'message/<int:pk>',
         MessageDetailView().as_view(),
-        name='message_detail')]
+        name='message_detail'),
+    path(
+        'register/', RegisterApiView().as_view(), name='register'
+    )]
