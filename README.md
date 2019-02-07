@@ -21,3 +21,14 @@ This project will provide RESTful API to serve as a backend for its associated a
 
 # Architecture
 -Requires Python >= 3.6, Django, PostgreSQL
+
+# Endpoints
+- `api/v1/resort/`: List resorts
+- `apt/v1/resort/<id>`: Retrieve a specific resort by id
+- `api/v1/user/<id>`: Retrive a specific user by id
+- `api/v1/team/<id>`: Retrieve a specific team by id
+- `api/v1/resort/<resort_id>/team/`: Retrieve a list of teams at resort with id
+- `api/v1/team/`: Retrieve a list of teams
+
+# Changelog
+
