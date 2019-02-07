@@ -10,8 +10,8 @@ class PeakUser(models.Model):
     user_lastName = models.CharField(max_length=64)
     user_fav_resort = models.CharField(max_length=128, blank=True)
     user_date_of_birth = models.DateField()
-    user_groups_belong = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True)
-    user_profile_picture = models.FileField(upload_to='uploads/')
+    user_groups_belong = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
+    user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
     user_date_joined = models.DateField()
 
 
@@ -33,16 +33,16 @@ class Resort(models.Model):
     Database table for Resort. Data pulled from API.
     """
     resort_name = models.CharField(max_length=64)
-    resort_location_longitude = models.DecimalField(max_digits=30, decimal_places=15)
-    resort_location_latitude = models.DecimalField(max_digits=30, decimal_places=15)
+    resort_location_longitude = models.CharField(max_length=64)
+    resort_location_latitude = models.CharField(max_length=64)
     resort_address_line1 = models.CharField(max_length=64)
-    resort_address_line2 = models.CharField(max_length=64, blank=True)
+    resort_address_line2 = models.CharField(max_length=64, blank=True, null=True, default='')
     resort_address_city = models.CharField(max_length=64)
     resort_address_state = models.ForeignKey('State', on_delete=models.CASCADE)
     resort_address_zip_code = models.IntegerField()
     resort_website_url = models.CharField(max_length=128, blank=True)
     resort_altitude = models.IntegerField(blank=True)
-    resort_teams = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True)
+    resort_teams = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
 
 
 class State(models.Model):

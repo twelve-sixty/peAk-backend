@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework'
     # 'sass_processor',
 ]
 
@@ -151,7 +152,7 @@ if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-REDIS_URL = 'redis://{}:6379'.format(os.getenv('REDIS_URL'))
+# REDIS_URL = 'redis://{}:6379'.format(os.getenv('REDIS_URL'))
 # CACHES = {
 #     'default': {
 #         'BACKEND': 'django_redis.cache.RedisCache',
@@ -171,15 +172,15 @@ CACHE_TTL = 60 * 1
 # channel config
 ASGI_APPLICATION = 'peAk.routing.application'
 
-# redis_host = os.getenv('REDIS_HOST', 'localhost')
+REDIS_URL = os.getenv('REDIS_HOST', 'localhost')
 
 CHANNEL_LAYERS = {
     "default": {
         # This example app uses the Redis channel layer implementation channels_redis
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [REDIS_URL, ('localhost', 6379)],
-            # "hosts": [(redis_host, 6379)],
+            # "hosts": [REDIS_URL, ('localhost', 6379)],
+            "hosts": [(REDIS_URL, 6379)],
         },
     },
 }
