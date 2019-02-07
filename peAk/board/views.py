@@ -1,16 +1,19 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ResortSerializer, UserSerializer, TeamOverviewSerializer, MessageSerializer, TeamDetailSerializer
+from .serializers import ResortListSerializer, ResortDetailSerializer, UserSerializer, TeamOverviewSerializer, MessageSerializer, TeamDetailSerializer, TeamCreateSerializer
 from .models import Resort, PeakUser, Team
 
 #TODO: Uncomment auth lines when app auth is working
 
 class ResortListApiView(generics.ListCreateAPIView):
-    """List or create Resort objects in API."""
+    """List Resort objects via the API. Resort data returned
+    in this view is in compact form, as opposed th ReosrtDetailApiView,
+    which gives detailed info about a single resort."""
+
     # permission_classes = (IsAuthenticated,)
     # authentication_classes = (TokenAuthentication, )
-    serializer_class = ResortSerializer
+    serializer_class = ResortListSerializer
     #https://stackoverflow.com/questions/3711349/django-and-query-string-parameters
 
     def get_queryset(self):
@@ -27,14 +30,18 @@ class ResortListApiView(generics.ListCreateAPIView):
 
 
 class ResortDetailApiView(generics.RetrieveAPIView):
-    serializer_class = ResortSerializer
+    """Retrieve Resort object via the API. Resort data returned
+    in this view is in detailed form, as opposed th ResortListApiView,
+    which gives detailed info about a single resort."""
+    serializer_class = ResortDetailSerializer
 
     def get_queryset(self):
         return Resort.objects.filter(id=self.kwargs['pk'])
 
-#TODO: Build out view
 
 class UserDetailApiView(generics.RetrieveAPIView):
+    """Retrienve a PeakUser object via the API."""
+
 
     # password = serializers.CharField(write_only=True)
     serializer_class = UserSerializer
@@ -54,7 +61,6 @@ class UserDetailApiView(generics.RetrieveAPIView):
 
 
 #TODO: Build out view
-
 class TeamListView(generics.ListCreateAPIView):
     def get_queryset(self):
         return Team.objects.filter(team_resort=self.kwargs['pk'])
@@ -65,6 +71,18 @@ class TeamDetailView(generics.RetrieveAPIView):
     serializer_class = TeamDetailSerializer
     def get_queryset(self):
         return Team.objects.filter(id=self.kwargs['pk'])
+
+
+class TeamCreateView(generics.CreateAPIView):
+    """Create Team objects via the API."""
+
+    serializer_class = TeamCreateSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+
+
 
 #TODO: Build out view
 class MessageListView(generics.ListAPIView):
@@ -85,7 +103,7 @@ class UserApiView(generics.RetrieveAPIView):
         return PeakUser.objects.filter(id=self.kwargs['pk'])
 
 
-class RegisterApiView(generics.CreateAPIView):
+class RegisterUserApiView(generics.CreateAPIView):
     """CBV to handle registration requests on REST API.
 
     """

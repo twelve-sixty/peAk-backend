@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import ResortListApiView, ResortDetailApiView, UserDetailApiView, TeamListView, TeamDetailView, MessageListView, MessageDetailView, ResortTeamListApiView
+from .views import ResortListApiView, ResortDetailApiView, UserDetailApiView, TeamListView, TeamDetailView, MessageListView, MessageDetailView, ResortTeamListApiView, TeamCreateView, RegisterUserApiView
 
 
 urlpatterns = [
@@ -18,7 +18,7 @@ urlpatterns = [
         name='user_detail'),
     path(
         'team/',
-        TeamListView().as_view(),
+        TeamCreateView().as_view(),
         name='team_add'),
     path(
         'team/<int:pk>',
@@ -31,4 +31,7 @@ urlpatterns = [
     path(
         'message/<int:pk>',
         MessageDetailView().as_view(),
-        name='message_detail')]
+        name='message_detail'),
+    path(
+        'register/', RegisterUserApiView().as_view(), name='register'
+    )]
