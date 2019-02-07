@@ -1,5 +1,8 @@
 from django.db import models
 from multiselectfield import MultiSelectField
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 STATES = [
@@ -124,11 +127,24 @@ class PeakUser(models.Model):
     """
     Holding the users for peAk website.
     """
-    user_email = models.CharField(max_length=64)
-    user_firstName = models.CharField(max_length=64)
-    user_lastName = models.CharField(max_length=64)
-    user_fav_resort = models.CharField(max_length=128, blank=True)
-    user_date_of_birth = models.DateField()
-    user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
-    user_date_joined = models.DateField()
-    user_team_belong = models.ManyToManyField('Team', blank=True, related_name='users')
+    # user_email = models.CharFielld(max_length=64)
+    user_firstName = models.CharField(max_length=64, blank=True, null=True)
+    user_lastName = models.CharField(max_length=64, blank=True, null=True)
+    # user_userName = models.CharField(max_length=64)
+    user_fav_resort = models.CharField(max_length=128, blank=True, null=True)
+    user_date_of_birth = models.DateField(blank=True, null=True)
+    # user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
+    # user_date_joined = models.DateField(blank=True, null=True)
+    user_team_belong = models.TextField('Team', blank=True, null=True, default='[]')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        PeakUser.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.peakuser.save()

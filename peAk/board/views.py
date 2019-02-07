@@ -11,7 +11,7 @@ class ResortListApiView(generics.ListCreateAPIView):
     # permission_classes = (IsAuthenticated,)
     # authentication_classes = (TokenAuthentication, )
     serializer_class = ResortSerializer
-    #https://stackoverflow.com/questions/3711349/django-and-query-string-parameters
+    # https://stackoverflow.com/questions/3711349/django-and-query-string-parameters
 
     def get_queryset(self):
         lat = self.request.GET.get('latitude')
