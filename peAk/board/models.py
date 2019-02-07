@@ -85,6 +85,7 @@ class Resort(models.Model):
     resort_address_zip_code = models.IntegerField()
     resort_website_url = models.CharField(max_length=128, blank=True)
     resort_altitude = models.IntegerField(blank=True)
+    resort_team = models.ForeignKey('Team', on_delete=models.CASCADE, null=True)
 
 
 class Team(models.Model):
@@ -97,8 +98,9 @@ class Team(models.Model):
     team_description = models.CharField(max_length=128)
     team_status = models.CharField(max_length=16, default='Active')
     team_tags = MultiSelectField(choices=TAGS, blank=True, null=True)
-    team_resort = models.ForeignKey('Resort', on_delete=models.CASCADE)
+    team_resort = models.ForeignKey('Resort', on_delete=models.CASCADE, related_name='teams')
     team_administrator = models.ForeignKey('PeakUser', on_delete=models.CASCADE)
+    # team_users = models.ForeignKey('PeakUser', on_delete=models.CASCADE)
 
 
 class MessageBoard(models.Model):
@@ -129,4 +131,4 @@ class PeakUser(models.Model):
     user_date_of_birth = models.DateField()
     user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
     user_date_joined = models.DateField()
-    user_team_belong = models.ManyToManyField('Team', blank=True)
+    user_team_belong = models.ManyToManyField('Team', blank=True, related_name='users')

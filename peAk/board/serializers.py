@@ -98,7 +98,8 @@ class ResortSerializer(serializers.ModelSerializer):
             'resort_address_zip_code',
             'websiteUrl',
             'altitude',
-            'teams'
+            'teams',
+            # 'resort_team'
         )
 
 
