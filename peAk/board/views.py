@@ -110,8 +110,8 @@ class RegisterUserApiView(generics.CreateAPIView):
     """CBV to handle registration requests on REST API.
 
     """
-    permission_classes = ''
-    authentication_classes = (TokenAuthentication,)
+    # permission_classes = ''
+    # authentication_classes = (TokenAuthentication,)
     serializer_class = CreateUserSerializer
 
 
