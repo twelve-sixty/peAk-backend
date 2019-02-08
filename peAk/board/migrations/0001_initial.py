@@ -84,7 +84,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='message',
             name='message_board',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='board.MessageBoard'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='board.MessageBoard'),
         ),
         migrations.AddField(
             model_name='message',

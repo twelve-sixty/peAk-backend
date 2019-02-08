@@ -119,7 +119,7 @@ class Message(models.Model):
     """Database Table for each Message."""
     message = models.CharField(max_length=128)
     message_date = models.DateField()
-    message_board = models.ForeignKey('MessageBoard', on_delete=models.CASCADE)
+    message_board = models.ForeignKey('MessageBoard', on_delete=models.CASCADE, blank=True, null=True)
     message_user = models.ForeignKey('PeakUser', on_delete=models.CASCADE)
 
 

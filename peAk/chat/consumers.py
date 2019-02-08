@@ -20,6 +20,8 @@
 
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+import datetime
+from board.models import Message, MessageBoard, PeakUser, User
 import json
 
 
@@ -60,6 +62,23 @@ class ChatConsumer(WebsocketConsumer):
 
     def chat_message(self, event):
         message = event['message']
+        print('message magic from chat_message: ', dir(self))
+        print(self.scope['user'])
+        print(self.room_name)
+        user = PeakUser.objects.filter(user__username=self.scope['user'])
+        # message_board=MessageBoard.objects.filter()
+        print("*"*25)
+        print('user created: ', list(user)[0])
+        print('user type: ', type(user))
+        print('user type: ', type(user.distinct()))
+
+        model = Message(
+            message_user=list(user)[0],
+            message=message,
+            # message_board=message_board
+            message_date=datetime.date.today().strftime('%Y-%m-%d'))
+        print('model created: ', model)
+        model.save()
 
         self.send(text_data=json.dumps({
             'message': message
