@@ -1,19 +1,19 @@
 id,resort_name,resort_location_latitude,resort_location_longitude,resort_address_line1,resort_address_line2,resort_address_city,resort_address_state,resort_address_zip_code,resort_website_url,resort_altitude
-1,49-degrees-north-mountain-resort,48.3011,-117.5629,3311 Flowery Trail Rd,,Chewelah,WA,99109,http://www.ski49n.com/,1760
-2,alpental,47.4442,-121.4259,1001 WA-906,,Snoqualmie Pass,WA,98068,https://summitatsnoqualmie.com/alpental,1670
-3,badger-mountain,46.2335,-119.3184,1774 W. Baseline Rd,,Waterville,WA,98858,http://skibadgermt.com/,1158
-4,bluewood,46.0825,-117.8512,2000 North Touchet Road,,Dayton,WA,99328,http://www.bluewood.com/,1730
-5,cascade-powder-guides,47.7429,-121.1613,138 BIRCH STREET,,Leavenworth,WA,98826,http://www.cascadepowderguides.com/,1705
-6,crystal-mountain-wa,46.9282,-121.5045,33914 Crystal Mountain Blvd.,,Enumclaw,WA,98022,https://www.crystalmountainresort.com,2137
-7,echo-valley-lake-chelan,47.9367,-120.0539,491 Cooper Gulch Rd,,Chelan,WA,98816,http://www.echovalley.org/,950
-8,hurricane-ridge,47.9331,-123.4096,600 E. Park Avenue ,,Port Angeles,WA,98362,https://www.nps.gov/olym/planyourvisit/visiting-hurricane-ridge.htm,1676
-9,leavenworth-ski-hill,47.6141,-120.6687,PO Box 573 ,,Leavenworth,WA,98826,https://skileavenworth.com/locations/ski-hill,520
-10,loup-loup-ski-bowl,48.3944,-119.9110,97 FS 4200 100 Road,,Okanogan,WA,98856,https://skitheloup.com/,1620
-11,mt-baker,48.7767,-121.8144,1420 IOWA STREET,,BELLINGHAM,WA,98229,https://www.mtbaker.us/,1525
-12,mt-spokane,47.9213,-117.1141,PO BOX 1659,,Mead,WA,98021,https://www.mtspokane.com/,1795
-13,north-cascade-heliskiing-mazama,48.5962,-120.4397,31 Early Winters Dr,,Mazama,WA,98833,https://heli-ski.com/,2700
-14,sahalie-ski-club,47.4308,-121.4165,19100 Alpental Access Road SE,,Snoqualmie Pass,WA,98068,http://www.sahalie.org/chair2/Home.aspx,966
-15,sitzmark,60.9605,-149.1081,2080 Havillah Rd,,Tonasket,WA,98855,http://skisitzmark.org/,1485
-16,stevens-pass,47.7448,-121.0890,Summit Stevens Pass, US Hwy 2,Skykomish,WA,98288,https://www.stevenspass.com/site,1750
-17,wenatchee-mission-ridge,47.2924,-120.3998,7500 Mission Ridge Rd,,Wenatchee,WA,98801,https://www.missionridge.com/,2078
-18,white-pass,46.6387,-121.3895,48935 US Hwy 12,,Naches,WA,98937,https://skiwhitepass.com/,1986
+1,49 Degrees North Mountain Resort,48.3011,-117.5629,3311 Flowery Trail Rd,,Chewelah,WA,99109,http://www.ski49n.com/,1760
+2,Alpental,47.4442,-121.4259,1001 WA-906,,Snoqualmie Pass,WA,98068,https://summitatsnoqualmie.com/alpental,1670
+3,Badger Mountain,46.2335,-119.3184,1774 W. Baseline Rd,,Waterville,WA,98858,http://skibadgermt.com/,1158
+4,Bluewood,46.0825,-117.8512,2000 North Touchet Road,,Dayton,WA,99328,http://www.bluewood.com/,1730
+5,Cascade Powder Guides,47.7429,-121.1613,138 Birtch Street,,Leavenworth,WA,98826,http://www.cascadepowderguides.com/,1705
+6,Crystal Mountain,46.9282,-121.5045,33914 Crystal Mountain Blvd.,,Enumclaw,WA,98022,https://www.crystalmountainresort.com,2137
+7,Echo Valley,47.9367,-120.0539,491 Cooper Gulch Rd,,Chelan,WA,98816,http://www.echovalley.org/,950
+8,Hurricane Ridge,47.9331,-123.4096,600 E. Park Avenue ,,Port Angeles,WA,98362,https://www.nps.gov/olym/planyourvisit/visiting-hurricane-ridge.htm,1676
+9,Leavenworth Ski Hill,47.6141,-120.6687,PO Box 573 ,,Leavenworth,WA,98826,https://skileavenworth.com/locations/ski-hill,520
+10,Loup Loup Ski Bowl,48.3944,-119.9110,97 FS 4200 100 Road,,Okanogan,WA,98856,https://skitheloup.com/,1620
+11,Mt Baker,48.7767,-121.8144,1420 Iowa Street,,Bellingham,WA,98229,https://www.mtbaker.us/,1525
+12,Mt Spokane,47.9213,-117.1141,PO BOX 1659,,Mead,WA,98021,https://www.mtspokane.com/,1795
+13,North Cascade Heliskiing Mazama,48.5962,-120.4397,31 Early Winters Dr,,Mazama,WA,98833,https://heli-ski.com/,2700
+14,Sahalie Ski Club,47.4308,-121.4165,19100 Alpental Access Road SE,,Snoqualmie Pass,WA,98068,http://www.sahalie.org/chair2/Home.aspx,966
+15,Sitzmark,60.9605,-149.1081,2080 Havillah Rd,,Tonasket,WA,98855,http://skisitzmark.org/,1485
+16,Stevens Pass,47.7448,-121.0890,Summit Stevens Pass, US Hwy 2,Skykomish,WA,98288,https://www.stevenspass.com/site,1750
+17,Wenatchee Mission Ridge,47.2924,-120.3998,7500 Mission Ridge Rd,,Wenatchee,WA,98801,https://www.missionridge.com/,2078
+18,White Pass,46.6387,-121.3895,48935 US Hwy 12,,Naches,WA,98937,https://skiwhitepass.com/,1986

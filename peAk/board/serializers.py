@@ -52,39 +52,10 @@ class UserSerializer(serializers.ModelSerializer):
             'teams')
 
 
-# class CreateUserSerializer(serializers.ModelSerializer):
-#     """Create serialized User objects."""
-#     password = serializers.CharField(write_only=True)
-#     class Meta:
-#         model = User
-#         fields = (
-#             'id',
-#             'username',
-#             'email',
-#             'password',
-#             'first_name',
-#             'last_name')
-#
-#     def create(self, validated_data):
-#         print('*****', self.data)
-#         user = super().create({
-#             'username': validated_data['username'],
-#             'email': validated_data['email'],
-#             'bio': self.data['bio']
-#             # 'user_firstName': validated_data['firstName'],
-#             # 'user_lastName': validated_data['lastName'],
-#             # 'user_date_of_birth': validated_data['birthDate']
-#
-#
-#         })
-#         user.set_password(validated_data['password'])
-#         user.save()
-#         return user
-
-
 class CreateUserSerializer(serializers.ModelSerializer):
     """Create serialized User objects."""
     password = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
         fields = (
@@ -96,16 +67,10 @@ class CreateUserSerializer(serializers.ModelSerializer):
             'last_name')
 
     def create(self, validated_data):
-        print('*****', self.data)
+        print(self.data)
         user = super().create({
             'username': validated_data['username'],
-            'email': validated_data['email'],
-            # 'peakuser.bio': validated_data['bio']
-            # 'user_firstName': validated_data['firstName'],
-            # 'user_lastName': validated_data['lastName'],
-            # 'user_date_of_birth': validated_data['birthDate']
-
-
+            'email': validated_data['email']
         })
         user.set_password(validated_data['password'])
         user.save()

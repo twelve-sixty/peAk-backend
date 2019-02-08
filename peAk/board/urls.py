@@ -4,20 +4,20 @@ from rest_framework.authtoken import views
 
 urlpatterns = [
     path(
-        'resort/',
+        'resort',
         ResortListApiView.as_view(),
         name='resort_list'),
     path(
         'resort/<int:pk>',
         ResortDetailApiView.as_view(),
         name='resort_detail'),
-    path('resort/<int:resort_id>/team/', ResortTeamListApiView.as_view(), name='resort_team_list'),
+    path('resort/<int:resort_id>/team', ResortTeamListApiView.as_view(), name='resort_team_list'),
     path(
         'user/<int:pk>',
         UserDetailApiView().as_view(),
         name='user_detail'),
     path(
-        'team/',
+        'team',
         TeamCreateView().as_view(),
         name='team_add'),
     path(
@@ -25,16 +25,16 @@ urlpatterns = [
         TeamDetailView().as_view(),
         name='team_detail'),
     path(
-        'message/',
+        'message',
         MessageListView().as_view(),
         name='message_list'),
     path(
         'message/<int:pk>',
         MessageDetailView().as_view(),
         name='message_detail'),
-    path('myteams/', TeamListView().as_view(), name='team_list'),
+    path('myteams', TeamListView().as_view(), name='team_list'),
     path(
-        'register/', RegisterUserApiView().as_view(), name='register'
+        'register', RegisterUserApiView().as_view(), name='register'
     ),
-    path('login/', views.obtain_auth_token)
+    path('login', views.obtain_auth_token)
 ]
