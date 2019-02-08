@@ -98,18 +98,18 @@ class TeamCreateSerializer(serializers.ModelSerializer):
             # 'users'
         )
 
-    def create(self, validated_data):
-        # print('**validated_data**', validated_data)
-        team = super().create({
-            'team_name': validated_data['team_name'],
-            'team_meet_date': validated_data['team_meet_date'],
-            'team_max_capacity': validated_data['team_max_capacity'],
-            'team_description': validated_data['team_description'],
-            'team_administrator': validated_data['team_administrator'],
-            'team_resort': validated_data['team_resort']
-        })
-        team.save()
-        return team
+    # def create(self, validated_data):
+    #     # print('**validated_data**', validated_data)
+    #     team = super().create({
+    #         'team_name': validated_data['team_name'],
+    #         'team_meet_date': validated_data['team_meet_date'],
+    #         'team_max_capacity': validated_data['team_max_capacity'],
+    #         'team_description': validated_data['team_description'],
+    #         'team_administrator': validated_data['team_administrator'],
+    #         'team_resort': validated_data['team_resort']
+    #     })
+    #     team.save()
+    #     return team
 
 
 class ResortListSerializer(serializers.ModelSerializer):
