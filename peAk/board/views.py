@@ -83,14 +83,15 @@ class TeamCreateView(generics.CreateAPIView):
 
 
 
-
 #TODO: Build out view
 class MessageListView(generics.ListAPIView):
     pass
 
+
 #TODO: Build out view
 class MessageDetailView(generics.RetrieveAPIView):
     pass
+
 
 class UserApiView(generics.RetrieveAPIView):
     """CBV to handle requests for users on REST API.
