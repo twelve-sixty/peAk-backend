@@ -1,29 +1,6 @@
 from rest_framework import serializers
-# from django.contrib.auth.models import PeakUser
+from django.contrib.auth.models import User
 from .models import Resort, PeakUser, Team
-
-
-class UserSerializer(serializers.ModelSerializer):
-    """
-    """
-
-    # Map field names from our db fields to the ones expected by the frontend
-    username = serializers.ReadOnlyField(source='user_username')
-    bio = serializers.ReadOnlyField(source='user_bio')
-    # TODO: turn age into an actual calculation from birthdate
-    age = serializers.ReadOnlyField(source='user_date_of_birth')
-    favResort = serializers.ReadOnlyField(source='user_fav_resort', required=False, allow_null=True)
-    teamBelong = serializers.ReadOnlyField(source='user_team_belong', required=False, allow_null=True)
-
-    class Meta:
-        model = PeakUser
-        fields = (
-            'id',
-            'username',
-            'bio',
-            'age',
-            'favResort',
-            'teamBelong')
 
 
 class TeamOverviewSerializer(serializers.ModelSerializer):
@@ -49,6 +26,90 @@ class TeamOverviewSerializer(serializers.ModelSerializer):
             'maxCapacity',
             'meetDate',
             'status')
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """
+    """
+
+    # Map field names from our db fields to the ones expected by the frontend
+    username = serializers.ReadOnlyField(source='user_username')
+    bio = serializers.ReadOnlyField(source='user_bio')
+    # TODO: turn age into an actual calculation from birthdate
+    age = serializers.ReadOnlyField(source='user_date_of_birth')
+    favResort = serializers.ReadOnlyField(source='user_fav_resort', required=False, allow_null=True)
+    # teams = serializers.ReadOnlyField(source='user_team_belong', required=False, allow_null=True)
+    teams = TeamOverviewSerializer(source='user_team_belong', many=True)
+
+    class Meta:
+        model = PeakUser
+        fields = (
+            'id',
+            'username',
+            'bio',
+            'age',
+            'favResort',
+            'teams')
+
+
+# class CreateUserSerializer(serializers.ModelSerializer):
+#     """Create serialized User objects."""
+#     password = serializers.CharField(write_only=True)
+#     class Meta:
+#         model = User
+#         fields = (
+#             'id',
+#             'username',
+#             'email',
+#             'password',
+#             'first_name',
+#             'last_name')
+#
+#     def create(self, validated_data):
+#         print('*****', self.data)
+#         user = super().create({
+#             'username': validated_data['username'],
+#             'email': validated_data['email'],
+#             'bio': self.data['bio']
+#             # 'user_firstName': validated_data['firstName'],
+#             # 'user_lastName': validated_data['lastName'],
+#             # 'user_date_of_birth': validated_data['birthDate']
+#
+#
+#         })
+#         user.set_password(validated_data['password'])
+#         user.save()
+#         return user
+
+
+class CreateUserSerializer(serializers.ModelSerializer):
+    """Create serialized User objects."""
+    password = serializers.CharField(write_only=True)
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'email',
+            'password',
+            'first_name',
+            'last_name')
+
+    def create(self, validated_data):
+        print('*****', self.data)
+        user = super().create({
+            'username': validated_data['username'],
+            'email': validated_data['email'],
+            # 'peakuser.bio': validated_data['bio']
+            # 'user_firstName': validated_data['firstName'],
+            # 'user_lastName': validated_data['lastName'],
+            # 'user_date_of_birth': validated_data['birthDate']
+
+
+        })
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
 
 class TeamDetailSerializer(serializers.ModelSerializer):
@@ -95,21 +156,21 @@ class TeamCreateSerializer(serializers.ModelSerializer):
             'team_tags',
             'team_administrator',
             'team_resort'
-            # 'users'
         )
 
-    # def create(self, validated_data):
-    #     # print('**validated_data**', validated_data)
-    #     team = super().create({
-    #         'team_name': validated_data['team_name'],
-    #         'team_meet_date': validated_data['team_meet_date'],
-    #         'team_max_capacity': validated_data['team_max_capacity'],
-    #         'team_description': validated_data['team_description'],
-    #         'team_administrator': validated_data['team_administrator'],
-    #         'team_resort': validated_data['team_resort']
-    #     })
-    #     team.save()
-    #     return team
+    def create(self, validated_data):
+        print(self.data)
+        # print('**validated_data**', validated_data)
+        team = super().create({
+            'team_name': validated_data['team_name'],
+            'team_meet_date': validated_data['team_meet_date'],
+            'team_max_capacity': validated_data['team_max_capacity'],
+            'team_description': validated_data['team_description'],
+            'team_administrator': validated_data['team_administrator'],
+            'team_resort': validated_data['team_resort']
+        })
+        team.save()
+        return team
 
 
 class ResortListSerializer(serializers.ModelSerializer):
