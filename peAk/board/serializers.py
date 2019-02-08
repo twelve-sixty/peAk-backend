@@ -66,13 +66,15 @@ class CreateUserSerializer(serializers.ModelSerializer):
             'last_name')
 
     def create(self, validated_data):
+        print('*****', self.data)
         user = super().create({
             'username': validated_data['username'],
             'email': validated_data['email'],
-            'user_firstName': validated_data['firstName'],
-            'user_lastName': validated_data['lastName'],
-            'user_date_of_birth': validated_data['birthDate'],
-            'bio': validated_data['bio']
+            # 'bio': self.data['bio'],
+            # 'user_firstName': validated_data['firstName'],
+            # 'user_lastName': validated_data['lastName'],
+            # 'user_date_of_birth': validated_data['birthDate']
+
 
         })
         user.set_password(validated_data['password'])

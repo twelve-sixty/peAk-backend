@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ResortListSerializer, ResortDetailSerializer, UserSerializer, TeamOverviewSerializer, MessageSerializer, TeamDetailSerializer, TeamCreateSerializer
+from .serializers import ResortListSerializer, ResortDetailSerializer, UserSerializer, TeamOverviewSerializer, MessageSerializer, TeamDetailSerializer, TeamCreateSerializer, CreateUserSerializer
 from .models import Resort, PeakUser, Team
 
 #TODO: Uncomment auth lines when app auth is working
@@ -112,7 +112,7 @@ class RegisterUserApiView(generics.CreateAPIView):
     """
     permission_classes = ''
     authentication_classes = (TokenAuthentication,)
-    serializer_class = UserSerializer
+    serializer_class = CreateUserSerializer
 
 
 class ResortTeamListApiView(generics.ListAPIView):

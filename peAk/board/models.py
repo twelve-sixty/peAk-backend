@@ -137,12 +137,12 @@ class PeakUser(models.Model):
     # user_date_joined = models.DateField(blank=True, null=True)
     user_team_belong = models.TextField('Team', blank=True, null=True, default='[]')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    bio = models.CharField(max_length=256, blank=True, null=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        PeakUser.objects.crate(user=instance)
+        PeakUser.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)
