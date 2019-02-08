@@ -21,7 +21,7 @@
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 import datetime
-from board.models import Message, MessageBoard, PeakUser, User
+from board.models import Message, MessageBoard, PeakUser, User, Team
 import json
 
 
@@ -53,6 +53,16 @@ class ChatConsumer(WebsocketConsumer):
         print("\nreceive called...\n")
         text_data_json = json.loads(text_data)
         user = PeakUser.objects.filter(user__username=self.scope['user'])
+        print(self.room_name)
+
+        print("\nnow, we want to find the team where user belongs to...\n")
+        print(dir(user))
+        print(list(user)[0])
+        team_str = list(user)[0].user_team_belong.replace('[', '').replace("]", "")
+        print('team_str', team_str)
+        message_board = MessageBoard.objects.filter(message_board_teams__team_name=team_str)
+        print('messageboard', message_board)
+
 
         # sending the message without "user_name :" in front of it into database.
         message = text_data_json['message']
@@ -60,7 +70,7 @@ class ChatConsumer(WebsocketConsumer):
         model = Message(
             message_user=list(user)[0],
             message=message,
-            # message_board=message_board
+            message_board=list(message_board)[0],
             message_date=datetime.date.today().strftime('%Y-%m-%d'))
         # print('model created: ', model)
         model.save()
@@ -79,8 +89,7 @@ class ChatConsumer(WebsocketConsumer):
     def chat_message(self, event):
         print("\nchat_message called...\n")
         # print('message magic from chat_message: ', dir(self))
-        # print(self.scope['user'])
-        # print(self.room_name)
+
         # user = PeakUser.objects.filter(user__username=self.scope['user'])
         message = event['message']
         # print('event = ', event)
