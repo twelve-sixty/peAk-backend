@@ -111,8 +111,8 @@ class MessageBoard(models.Model):
     Database Table for each Team Message Board.
     """
     message_board_name = models.CharField(max_length=16)
-    message_board_description = models.CharField(max_length=128)
-    message_board_teams = models.ForeignKey('Team', on_delete=models.CASCADE)
+    # message_board_description = models.CharField(max_length=128)
+    message_board_teams = models.OneToOneField('Team', on_delete=models.CASCADE)
 
 
 class Message(models.Model):
@@ -127,11 +127,11 @@ class PeakUser(models.Model):
     """
     Holding the users for peAk website.
     """
-    # user_email = models.CharFielld(max_length=64)
+    # user_email = models.CharField(max_length=64)
     user_firstName = models.CharField(max_length=64, blank=True, null=True)
     user_lastName = models.CharField(max_length=64, blank=True, null=True)
     # user_userName = models.CharField(max_length=64)
-    user_fav_resort = models.CharField(max_length=128, blank=True, null=True)
+    # user_fav_resort = models.CharField(max_length=128, blank=True, null=True)
     user_date_of_birth = models.DateField(blank=True, null=True)
     # user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
     # user_date_joined = models.DateField(blank=True, null=True)
@@ -148,3 +148,14 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.peakuser.save()
+
+
+@receiver(post_save, sender=Team)
+def create_message_board(sender, instance, created, **kwargs):
+    if created:
+        MessageBoard.objects.create(message_board_name=instance)
+
+
+@receiver(post_save, sender=Team)
+def save_message_board(sender, instance, **kwargs):
+    instance.message_board.save()

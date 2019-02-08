@@ -1,6 +1,6 @@
 from rest_framework import serializers
 # from django.contrib.auth.models import PeakUser
-from .models import Resort, PeakUser, Team
+from .models import Resort, PeakUser, Team, MessageBoard
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -110,6 +110,14 @@ class TeamCreateSerializer(serializers.ModelSerializer):
         })
         team.save()
         return team
+
+    # def create_message_board(self, validated_data):
+    #     message_board = super().create({
+    #         'message_board_name': validated_data['message_board_name'],
+    #         'message_board_team': validated_data['message_board_team']
+    #     })
+    #     message_board.save()
+    #     return message_board
 
 
 class ResortListSerializer(serializers.ModelSerializer):
