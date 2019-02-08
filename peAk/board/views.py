@@ -60,12 +60,6 @@ class UserDetailApiView(generics.RetrieveAPIView):
         return user
 
 
-#TODO: Build out view
-class TeamListView(generics.ListCreateAPIView):
-    def get_queryset(self):
-        return Team.objects.filter(team_resort=self.kwargs['pk'])
-
-
 class TeamDetailView(generics.RetrieveAPIView):
     #TODO: add isAdministrator property to JSON response if requester owns the Team
     serializer_class = TeamDetailSerializer
@@ -92,6 +86,15 @@ class MessageListView(generics.ListAPIView):
 class MessageDetailView(generics.RetrieveAPIView):
     pass
 
+
+class TeamListView(generics.ListAPIView):
+    """List the Teams associated with the logged in user."""
+    serializer_class = TeamDetailSerializer
+
+    def get_queryset(self):
+        return Team.objects.filter(user_team_belong=self.request.user.id)
+
+
 class UserApiView(generics.RetrieveAPIView):
     """CBV to handle requests for users on REST API.
 
@@ -117,3 +120,8 @@ class ResortTeamListApiView(generics.ListAPIView):
     serializer_class = TeamOverviewSerializer
     def get_queryset(self):
         return Team.objects.filter(team_resort__id=self.kwargs['resort_id'])
+
+
+#TODO: Update a Team with to add a PeakUser
+
+#TODO: Update a Team to remove a PeakUser

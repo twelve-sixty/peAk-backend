@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import ResortListApiView, ResortDetailApiView, UserDetailApiView, TeamListView, TeamDetailView, MessageListView, MessageDetailView, ResortTeamListApiView, TeamCreateView, RegisterUserApiView
+from .views import ResortListApiView, ResortDetailApiView, UserDetailApiView, TeamDetailView, MessageListView, MessageDetailView, ResortTeamListApiView, TeamCreateView, RegisterUserApiView, TeamListView
 from rest_framework.authtoken import views
 
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
         'message/<int:pk>',
         MessageDetailView().as_view(),
         name='message_detail'),
+    path('myteams/', TeamListView().as_view(), name='team_list'),
     path(
         'register/', RegisterUserApiView().as_view(), name='register'
     ),
