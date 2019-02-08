@@ -88,7 +88,7 @@ class Resort(models.Model):
     resort_address_zip_code = models.IntegerField()
     resort_website_url = models.CharField(max_length=128, blank=True)
     resort_altitude = models.IntegerField(blank=True)
-    resort_team = models.ForeignKey('Team', on_delete=models.CASCADE, null=True)
+    resort_team = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
 
 
 class Team(models.Model):
@@ -111,7 +111,7 @@ class MessageBoard(models.Model):
     Database Table for each Team Message Board.
     """
     message_board_name = models.CharField(max_length=16)
-    # message_board_description = models.CharField(max_length=128)
+    # message_board_description = models.CharField(max_length=128, blank=True, null=True)
     message_board_teams = models.OneToOneField('Team', on_delete=models.CASCADE)
 
 
