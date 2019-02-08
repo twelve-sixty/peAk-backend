@@ -1,6 +1,6 @@
 from rest_framework import serializers
 # from django.contrib.auth.models import PeakUser
-from .models import Resort, PeakUser, Team, MessageBoard
+from .models import Resort, PeakUser, Team
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -98,26 +98,18 @@ class TeamCreateSerializer(serializers.ModelSerializer):
             # 'users'
         )
 
-    def create(self, validated_data):
-        # print('**validated_data**', validated_data)
-        team = super().create({
-            'team_name': validated_data['team_name'],
-            'team_meet_date': validated_data['team_meet_date'],
-            'team_max_capacity': validated_data['team_max_capacity'],
-            'team_description': validated_data['team_description'],
-            'team_administrator': validated_data['team_administrator'],
-            'team_resort': validated_data['team_resort']
-        })
-        team.save()
-        return team
-
-    # def create_message_board(self, validated_data):
-    #     message_board = super().create({
-    #         'message_board_name': validated_data['message_board_name'],
-    #         'message_board_team': validated_data['message_board_team']
+    # def create(self, validated_data):
+    #     # print('**validated_data**', validated_data)
+    #     team = super().create({
+    #         'team_name': validated_data['team_name'],
+    #         'team_meet_date': validated_data['team_meet_date'],
+    #         'team_max_capacity': validated_data['team_max_capacity'],
+    #         'team_description': validated_data['team_description'],
+    #         'team_administrator': validated_data['team_administrator'],
+    #         'team_resort': validated_data['team_resort']
     #     })
-    #     message_board.save()
-    #     return message_board
+    #     team.save()
+    #     return team
 
 
 class ResortListSerializer(serializers.ModelSerializer):

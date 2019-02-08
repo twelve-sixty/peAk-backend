@@ -151,11 +151,11 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Team)
-def create_message_board(sender, instance, created, **kwargs):
+def create_team_board(sender, instance, created, **kwargs):
     if created:
-        MessageBoard.objects.create(message_board_name=instance)
+        MessageBoard.objects.create(message_board_teams=instance)
 
 
 @receiver(post_save, sender=Team)
-def save_message_board(sender, instance, **kwargs):
-    instance.message_board.save()
+def save_team_board(sender, instance, **kwargs):
+    instance.messageboard.save()
