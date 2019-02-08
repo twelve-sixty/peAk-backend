@@ -88,7 +88,7 @@ class Resort(models.Model):
     resort_address_zip_code = models.IntegerField()
     resort_website_url = models.CharField(max_length=128, blank=True)
     resort_altitude = models.IntegerField(blank=True)
-    resort_team = models.ForeignKey('Team', on_delete=models.CASCADE, null=True)
+    resort_team = models.ForeignKey('Team', on_delete=models.CASCADE, blank=True, null=True)
 
 
 class Team(models.Model):
@@ -111,15 +111,15 @@ class MessageBoard(models.Model):
     Database Table for each Team Message Board.
     """
     message_board_name = models.CharField(max_length=16)
-    message_board_description = models.CharField(max_length=128)
-    message_board_teams = models.ForeignKey('Team', on_delete=models.CASCADE)
+    # message_board_description = models.CharField(max_length=128, blank=True, null=True)
+    message_board_teams = models.OneToOneField('Team', on_delete=models.CASCADE)
 
 
 class Message(models.Model):
     """Database Table for each Message."""
     message = models.CharField(max_length=128)
     message_date = models.DateField()
-    message_board = models.ForeignKey('MessageBoard', on_delete=models.CASCADE)
+    message_board = models.ForeignKey('MessageBoard', on_delete=models.CASCADE, blank=True, null=True)
     message_user = models.ForeignKey('PeakUser', on_delete=models.CASCADE)
 
 
@@ -127,17 +127,17 @@ class PeakUser(models.Model):
     """
     Holding the users for peAk website.
     """
-    # user_email = models.CharFielld(max_length=64)
+    # user_email = models.CharField(max_length=64)
     user_firstName = models.CharField(max_length=64, blank=True, null=True)
     user_lastName = models.CharField(max_length=64, blank=True, null=True)
     # user_userName = models.CharField(max_length=64)
-    user_fav_resort = models.CharField(max_length=128, blank=True, null=True)
+    # user_fav_resort = models.CharField(max_length=128, blank=True, null=True)
     user_date_of_birth = models.DateField(blank=True, null=True)
     # user_profile_picture = models.FileField(upload_to='uploads/', blank=True)
     # user_date_joined = models.DateField(blank=True, null=True)
     user_team_belong = models.TextField('Team', blank=True, null=True, default='[]')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    bio = models.CharField(max_length=256, blank=True, null=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -148,3 +148,14 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.peakuser.save()
+
+
+@receiver(post_save, sender=Team)
+def create_team_board(sender, instance, created, **kwargs):
+    if created:
+        MessageBoard.objects.create(message_board_teams=instance)
+
+
+@receiver(post_save, sender=Team)
+def save_team_board(sender, instance, **kwargs):
+    instance.messageboard.save()
