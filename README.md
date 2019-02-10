@@ -7,7 +7,7 @@ Team Name: 1260
 # Project Manager
 - [Jason Burns](https://github.com/jasonb315/)
 
-# Contributors
+# Team Members
 - [Scott Currie](https://github.com/scott-currie/)
 - [Toby Huang](https://github.com/tobyatgithub)
 - [Roger Huba](https://github.com/RogerHuba)
