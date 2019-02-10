@@ -4,6 +4,9 @@ peAk-backend Application
 # Authors
 Team Name: 1260
 
+# Project Manager
+- [Jason Burns](https://github.com/jasonb315/)
+
 # Contributors
 - [Scott Currie](https://github.com/scott-currie/)
 - [Toby Huang](https://github.com/tobyatgithub)
