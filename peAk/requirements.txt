@@ -18,7 +18,7 @@ django-appconf==1.0.2
 django-compressor==2.2
 django-filter==2.1.0
 django-multiselectfield==0.1.8
-django-registration==3.0
+django-registration==3.1.2
 djangorestframework==3.9.1
 docker==3.7.0
 docker-compose==1.23.2
